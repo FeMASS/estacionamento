@@ -1,0 +1,12 @@
+<list>
+  <model.Veiculo>
+    <placa>1234-abcd</placa>
+    <modelo>Chevrolet Camaro</modelo>
+    <cor>Amarelo</cor>
+  </model.Veiculo>
+  <model.Veiculo>
+    <placa>5823-dfjs</placa>
+    <modelo>Ford Mustang</modelo>
+    <cor>Azul</cor>
+  </model.Veiculo>
+</list>
