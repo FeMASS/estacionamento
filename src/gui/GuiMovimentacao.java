@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Veiculo;
+import static org.joda.time.format.ISODateTimeFormat.date;
 
 public class GuiMovimentacao extends javax.swing.JInternalFrame {
     private Dados dados = new DadosVeiculo();
@@ -478,7 +479,9 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -605,6 +608,30 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
 
     private void bntTarifaNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntTarifaNormalActionPerformed
         
+        this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
+        this.veiculo.getPlaca();
+        
+        lblDiaDoServico.setText(this.veiculo.getDataMovimentacao());
+        lblHoraEntrada.setText(this.veiculo.getHoraEntrada());
+        
+        //Pega apenas a hora atual do sistema
+        String horaAtual = new SimpleDateFormat("hh").format(data);
+        //Converte a hh string em int
+        int data = Integer.parseInt(horaAtual);
+        
+        //criar variavel int entrada, pega apenas os dois primeiros caracteres da hora de entrada do carro,
+        //converte em int
+        int entrada = Integer.parseInt(this.veiculo.getHoraEntrada().substring(0,2));
+        
+        int valor = (data - entrada) * 1 + 2;
+        
+        lblHoraSaida.setText("pendente");
+        
+        String precoFinal = Integer.toString(valor);
+        precoFinal = "R$" + precoFinal + ",00";
+        
+        lblPrecoFinal.setText(precoFinal);
+
         
     }//GEN-LAST:event_bntTarifaNormalActionPerformed
 
@@ -614,7 +641,7 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-            this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
+        this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
         try {
             dados.excluir(this.veiculo);
         } catch (Exception e) {
