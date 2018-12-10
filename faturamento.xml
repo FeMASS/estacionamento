@@ -1,0 +1,22 @@
+<list>
+  <model.Faturamento>
+    <dia>08/12/2018</dia>
+    <valor>4</valor>
+  </model.Faturamento>
+  <model.Faturamento>
+    <dia>09/12/2018</dia>
+    <valor>3</valor>
+  </model.Faturamento>
+  <model.Faturamento>
+    <dia>09/12/2018</dia>
+    <valor>3</valor>
+  </model.Faturamento>
+  <model.Faturamento>
+    <dia>08/12/2018</dia>
+    <valor>4</valor>
+  </model.Faturamento>
+  <model.Faturamento>
+    <dia>08/12/2018</dia>
+    <valor>3</valor>
+  </model.Faturamento>
+</list>

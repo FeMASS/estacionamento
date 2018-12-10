@@ -3,6 +3,7 @@ package gui;
 
 import dao.Dados;
 import dao.DadosVeiculo;
+import dao.DadosFaturamento;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,60 +13,20 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Veiculo;
-import static org.joda.time.format.ISODateTimeFormat.date;
+import model.Faturamento;
 
 public class GuiMovimentacao extends javax.swing.JInternalFrame {
     private Dados dados = new DadosVeiculo();
+    private Dados fdados = new DadosFaturamento();
     private Veiculo veiculo;
-    private Boolean alterando = false;
-    
+    private Faturamento faturamento;
     // Informações da model.veiculo ============================================
     
     Date data = new Date();
     SimpleDateFormat dataMovimentacao = new SimpleDateFormat("dd/MM/yyyy");
     String dataFormatada = dataMovimentacao.format(data);
-    SimpleDateFormat horaEntrada = new SimpleDateFormat("hh:mm");
+    SimpleDateFormat horaEntrada = new SimpleDateFormat("HH:mm");
     String horaFormatada = horaEntrada.format(data);
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public SimpleDateFormat getDataMovimentacao() {
-        return dataMovimentacao;
-    }
-
-    public void setDataMovimentacao(SimpleDateFormat dataMovimentacao) {
-        this.dataMovimentacao = dataMovimentacao;
-    }
-
-    public String getDataFormatada() {
-        return dataFormatada;
-    }
-
-    public void setDataFormatada(String dataFormatada) {
-        this.dataFormatada = dataFormatada;
-    }
-
-    public SimpleDateFormat getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public void setHoraEntrada(SimpleDateFormat horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    public String getHoraFormatada() {
-        return horaFormatada;
-    }
-
-    public void setHoraFormatada(String horaFormatada) {
-        this.horaFormatada = horaFormatada;
-    }
     
     // =========================================================================
 
@@ -240,36 +201,37 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnConfirmar)
-                .addGap(18, 18, 18)
-                .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnConfirmar)
                         .addGap(18, 18, 18)
-                        .addComponent(lblHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(39, 39, 39)
-                            .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(44, 44, 44)
-                                .addComponent(lblCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(49, 49, 49))
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(44, 44, 44)
+                                        .addComponent(lblCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel5))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,31 +308,33 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(bntTarifaNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPrecoUnico, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                        .addComponent(btnExcluir)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir)
+                        .addGap(27, 27, 27))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntTarifaNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPrecoUnico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORMAÇÕES DE COBRANÇA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        jLabel4.setText("DIA DE SERVIÇO:");
+        jLabel4.setText("DATA DO SERVIÇO:");
 
         jLabel10.setText("HORA DA ENTRADA:");
 
@@ -379,59 +343,60 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         jLabel12.setText("PREÇO:");
 
         btnBaixaNaMovimentacao.setText("CONCLUIR PAGAMENTO");
+        btnBaixaNaMovimentacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBaixaNaMovimentacaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblDiaDoServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblHoraSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(64, 64, 64)
-                        .addComponent(lblPrecoFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addComponent(btnBaixaNaMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblDiaDoServico, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                    .addComponent(lblHoraEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPrecoFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(lblHoraSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnBaixaNaMovimentacao, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(btnBaixaNaMovimentacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblHoraSaida, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(lblDiaDoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblHoraSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDiaDoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)))
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPrecoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel12))
-                        .addGap(18, 18, 18))))
+                            .addComponent(jLabel12)
+                            .addComponent(lblPrecoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(btnBaixaNaMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
@@ -444,14 +409,17 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 373, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 373, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -466,9 +434,9 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -479,9 +447,7 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -505,21 +471,19 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         veiculo.setPlaca(txtPlaca.getText());
         veiculo.setModelo(txtModelo.getText());
         veiculo.setCor(txtCor.getText());
-        //Regar hora do sistema
-        SimpleDateFormat hora = new SimpleDateFormat("hh:mm");
-        veiculo.setHoraEntrada(hora.format(new Date()));
-        
-        //Pegar data do sistema
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         veiculo.setDataMovimentacao(data.format(new Date()));
-        
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
+        veiculo.setHoraEntrada(hora.format(new Date()));
+                       
         try {
             dados.incluir(veiculo);
         } catch (Exception ex) {
-            Logger.getLogger(GuiCadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GuiUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         preencherTabela();
-        JOptionPane.showMessageDialog(null, "Ticket Gerado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Cadastro confirmado e realizado!");
+        JOptionPane.showMessageDialog(null, "Ticket gerado e impresso com sucesso!");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -529,7 +493,7 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         String placa = txtPlaca.getText();
         String modelo = txtModelo.getText();
         String cor = txtCor.getText();
-              
+    
         lblPlaca.setText(placa);
         lblModelo.setText(modelo);
         lblCor.setText(cor);
@@ -568,6 +532,7 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         this.dados = dados;
     }
 
+    
 // Método de preenchimento rotineiro da tabela =================================   
     
     private void preencherTabela() {
@@ -588,7 +553,7 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < veiculos.size(); i++) {
             Veiculo ve = (Veiculo) veiculos.get(i);
-            Object linha[] = {ve, ve.getModelo(), ve.getCor(), ve.getDataMovimentacao(), ve.getHoraEntrada()}; // Não está colocando Data e Hora na Tabela
+            Object linha[] = {ve, ve.getModelo(), ve.getCor(), ve.getDataMovimentacao(), ve.getHoraEntrada()};
             tbl.addRow(linha);
         }
 
@@ -597,7 +562,6 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
     
     private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_txtModeloActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -607,7 +571,7 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void bntTarifaNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntTarifaNormalActionPerformed
-        
+        // TODO add your handling code here:
         this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
         this.veiculo.getPlaca();
         
@@ -615,33 +579,46 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         lblHoraEntrada.setText(this.veiculo.getHoraEntrada());
         
         //Pega apenas a hora atual do sistema
-        String horaAtual = new SimpleDateFormat("hh").format(data);
+        String horaAtual = new SimpleDateFormat("HH").format(data);
         //Converte a hh string em int
-        int data = Integer.parseInt(horaAtual);
+        int saida = Integer.parseInt(horaAtual);
         
         //criar variavel int entrada, pega apenas os dois primeiros caracteres da hora de entrada do carro,
         //converte em int
         int entrada = Integer.parseInt(this.veiculo.getHoraEntrada().substring(0,2));
-        
-        int valor = (data - entrada) * 1 + 2;
-        
-        lblHoraSaida.setText("pendente");
-        
+              
+        lblHoraSaida.setText(horaFormatada);
+        int valor2;
+        if (entrada>saida){
+            valor2 = (entrada-saida);
+        }else{
+            valor2 = (saida-entrada);     
+        }
+        int valor = 2 + valor2;
         String precoFinal = Integer.toString(valor);
         precoFinal = "R$" + precoFinal + ",00";
         
         lblPrecoFinal.setText(precoFinal);
-
-        
     }//GEN-LAST:event_bntTarifaNormalActionPerformed
 
     private void btnPrecoUnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoUnicoActionPerformed
         // TODO add your handling code here:
+        this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
+        this.veiculo.getPlaca();
+        
+        lblDiaDoServico.setText(this.veiculo.getDataMovimentacao());
+        lblHoraEntrada.setText(this.veiculo.getHoraEntrada());        
+        int valor = 3;
+        lblHoraSaida.setText(horaFormatada);  
+        String precoFinal = Integer.toString(valor);
+        precoFinal = "R$" + precoFinal + ",00";
+        lblPrecoFinal.setText(precoFinal);
+        
     }//GEN-LAST:event_btnPrecoUnicoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
+            this.veiculo = (Veiculo) tblVeiculos.getValueAt(tblVeiculos.getSelectedRow(), 0);
         try {
             dados.excluir(this.veiculo);
         } catch (Exception e) {
@@ -649,6 +626,27 @@ public class GuiMovimentacao extends javax.swing.JInternalFrame {
         }
         preencherTabela();  
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnBaixaNaMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaixaNaMovimentacaoActionPerformed
+        // TODO add your handling code here:
+        faturamento = new Faturamento();
+        faturamento.setDia(lblDiaDoServico.getText());
+        String valor; 
+        valor = lblPrecoFinal.getText();
+        String valorfinal = valor.replace(",00", "");
+        String valorfinal2 = valorfinal.replace("R$", "");           
+        faturamento.setValor(valorfinal2);
+        
+        try {
+            fdados.incluir(faturamento);
+        } catch (Exception ex) {
+            Logger.getLogger(GuiMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+
+        JOptionPane.showMessageDialog(null, "Pagamento realizado!");
+        JOptionPane.showMessageDialog(null, "A movimentação do veículo foi finalizada!");
+    }//GEN-LAST:event_btnBaixaNaMovimentacaoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

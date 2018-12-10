@@ -1,12 +1,44 @@
 <list>
   <model.Veiculo>
-    <placa>1234-abcd</placa>
-    <modelo>Chevrolet Camaro</modelo>
-    <cor>Amarelo</cor>
+    <placa>ABC-1234</placa>
+    <modelo>CAMARO</modelo>
+    <cor>AMARELO</cor>
+    <horaEntrada>17:16</horaEntrada>
+    <dataMovimentacao>08/12/2018</dataMovimentacao>
   </model.Veiculo>
   <model.Veiculo>
-    <placa>5823-dfjs</placa>
-    <modelo>Ford Mustang</modelo>
-    <cor>Azul</cor>
+    <placa>DSA-4321</placa>
+    <modelo>MUSTANG</modelo>
+    <cor>AZUL</cor>
+    <horaEntrada>18:17</horaEntrada>
+    <dataMovimentacao>08/12/2018</dataMovimentacao>
+  </model.Veiculo>
+  <model.Veiculo>
+    <placa>QWE-123</placa>
+    <modelo>FORD</modelo>
+    <cor>AZUL</cor>
+    <horaEntrada>17:21</horaEntrada>
+    <dataMovimentacao>09/12/2018</dataMovimentacao>
+  </model.Veiculo>
+  <model.Veiculo>
+    <placa>QRE-3212</placa>
+    <modelo>FORD</modelo>
+    <cor>BRANCO</cor>
+    <horaEntrada>18:20</horaEntrada>
+    <dataMovimentacao>09/12/2018</dataMovimentacao>
+  </model.Veiculo>
+  <model.Veiculo>
+    <placa>RRE-3212</placa>
+    <modelo>FORD</modelo>
+    <cor>VERDE</cor>
+    <horaEntrada>18:21</horaEntrada>
+    <dataMovimentacao>09/12/2018</dataMovimentacao>
+  </model.Veiculo>
+  <model.Veiculo>
+    <placa>YTR-5432</placa>
+    <modelo>FORD</modelo>
+    <cor>AMARELO</cor>
+    <horaEntrada>18:52</horaEntrada>
+    <dataMovimentacao>09/12/2018</dataMovimentacao>
   </model.Veiculo>
 </list>

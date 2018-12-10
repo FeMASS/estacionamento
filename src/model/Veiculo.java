@@ -34,7 +34,6 @@ public class Veiculo {
         this.dataMovimentacao = dataMovimentacao;
     }
     
-    
     public String getPlaca() {
         return placa;
     }

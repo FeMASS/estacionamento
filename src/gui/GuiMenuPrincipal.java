@@ -1,5 +1,6 @@
 
 package gui;
+//import model.Movimentacao;
 
 import javax.swing.JOptionPane;
 
@@ -21,11 +22,10 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnSaida = new javax.swing.JMenu();
-        btnEntrada = new javax.swing.JMenuItem();
+        btnMovimentacao = new javax.swing.JMenuItem();
         btnUsuarios = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        btnFaturamento = new javax.swing.JMenuItem();
         btnInformacoes = new javax.swing.JMenu();
         btnInformacoesDaProva = new javax.swing.JMenuItem();
 
@@ -44,22 +44,22 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
+            .addGap(0, 796, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 672, Short.MAX_VALUE)
+            .addGap(0, 795, Short.MAX_VALUE)
         );
 
         btnSaida.setText("Arquivo");
 
-        btnEntrada.setText("Movimentação");
-        btnEntrada.addActionListener(new java.awt.event.ActionListener() {
+        btnMovimentacao.setText("Movimentação");
+        btnMovimentacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntradaActionPerformed(evt);
+                btnMovimentacaoActionPerformed(evt);
             }
         });
-        btnSaida.add(btnEntrada);
+        btnSaida.add(btnMovimentacao);
 
         btnUsuarios.setText("Usuários");
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -73,16 +73,13 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Relatórios");
 
-        jMenuItem3.setText("Faturamento Diário");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        btnFaturamento.setText("Faturamento");
+        btnFaturamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                btnFaturamentoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setText("Faturamento Mensal");
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(btnFaturamento);
 
         jMenuBar1.add(jMenu2);
 
@@ -104,11 +101,15 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         jDesktopPane1.getAccessibleContext().setAccessibleName("");
@@ -117,9 +118,12 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void btnFaturamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFaturamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        GuiRelatorios telaRelatorios = new GuiRelatorios();
+        jDesktopPane1.add(telaRelatorios);
+        telaRelatorios.setVisible(true);        
+    }//GEN-LAST:event_btnFaturamentoActionPerformed
 
     private void btnInformacoesDaProvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformacoesDaProvaActionPerformed
         // TODO add your handling code here:
@@ -167,7 +171,7 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
 "Obs: Os donos precisam de consulta de faturamento diário e semanal.");
     }//GEN-LAST:event_btnInformacoesDaProvaActionPerformed
 
-    private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
+    private void btnMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimentacaoActionPerformed
         
 // Instanciando a tela de Movimentação =========================================  
 
@@ -175,7 +179,7 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.add(telaMovimentacao);
         telaMovimentacao.setVisible(true);
         
-    }//GEN-LAST:event_btnEntradaActionPerformed
+    }//GEN-LAST:event_btnMovimentacaoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
@@ -190,7 +194,7 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
 
 // Instanciando a tela de Cadastro de Usuários =================================        
         
-        GuiCadastroUsuario telaUsuario = new GuiCadastroUsuario();
+        GuiUsuario telaUsuario = new GuiUsuario();
         jDesktopPane1.add(telaUsuario);
         telaUsuario.setVisible(true);
         
@@ -234,15 +238,14 @@ public class GuiMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem btnEntrada;
+    private javax.swing.JMenuItem btnFaturamento;
     private javax.swing.JMenu btnInformacoes;
     private javax.swing.JMenuItem btnInformacoesDaProva;
+    private javax.swing.JMenuItem btnMovimentacao;
     private javax.swing.JMenu btnSaida;
     private javax.swing.JMenuItem btnUsuarios;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
